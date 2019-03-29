@@ -11,7 +11,7 @@
 
 
 
-\PassOptionsToClass{11pt,twoside}{article}
+\PassOptionsToClass{twoside,english,11pt}{article}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -21,7 +21,7 @@
 
 
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[UTF8, scheme=plain]{ctex}
+\RequirePackage[UTF8, scheme=plain,punct=kaiming]{ctex}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
@@ -30,7 +30,7 @@
 
 \RequirePackage{amsmath,amssymb}
 
-\linespread{1.2}
+
 
 
 
@@ -66,14 +66,15 @@
 %   citecolor={winered},
 %   linktoc=all,
 % }
-\RequirePackage[left=25.6mm, right=25.6mm, top=30mm, bottom=35mm]{geometry}
+\RequirePackage[left=27.6mm, right=27.6mm, top=32.7mm, bottom=28mm]{geometry}
 
 
 
 \usepackage{fancyhdr}
 \fancyhead{} % clear all fields 
-\fancyhead[LO]{\@author：\@title \@title} 
-\fancyhead[RE]{\includegraphics[width=0.12\textwidth]{ERJ.png} \raisebox{.2\height}{ \small 2019 年第 1 期}}
+% @author@title
+\fancyhead[LE]{张宁、张维洁：中国用能权交易可以获得经济红利与节能减排的双赢吗？} 
+\fancyhead[OR]{\raisebox{-0.2\height}{\includegraphics[width=0.16\textwidth]{ERJ.png}} \raisebox{.2\height}{ \small 2019 年工作论文}}
 \fancyfoot[R]{\thepage} 
 \fancyfoot[C]{} 
 % \fancyfoot[LO,CE]{From: K. Grant} 
@@ -81,6 +82,30 @@
 \renewcommand{\headrulewidth}{0.4pt} 
 % \renewcommand{\footrulewidth}{0.4pt}
 \pagestyle{fancy}
+
+
+\usepackage{abstract}
+\renewcommand{\abstractname}{}    % clear the title
+\renewcommand{\absnamepos}{empty} % originally center
+%\usepackage{lineno}
+%\linenumbers
+\usepackage[backend=biber,style=chinese-erj,natbib]{biblatex}
+\addbibresource{erjref.bib}
+\usepackage{indentfirst}
+
+\setlength{\parindent}{2em}
+\renewcommand{\abstracttextfont}{\normalsize}
+\usepackage{zhlipsum}
+
+%\renewcommand{\baselinestretch}{1} 
+\linespread{1.15}
+\setlength{\parskip}{0em}
+\usepackage{titlesec}
+%\widowpenalty=10000 
+%\clubpenalty=10000 
+\titleformat{name=\section}[block]{\large\filcenter}{\zhnumber{\thesection}、}{0pt}{}
+\titlespacing*{\section}{0pt}{0.8\baselineskip}{0.5\baselineskip}
+
 
 
 
