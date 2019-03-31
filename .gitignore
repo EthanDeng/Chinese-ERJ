@@ -1,3 +1,7 @@
+## biblatex files
+.bbx
+.cbx
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
