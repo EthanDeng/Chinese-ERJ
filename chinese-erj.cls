@@ -21,7 +21,7 @@
 
 
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[UTF8, scheme=plain,punct=kaiming]{ctex}
+\RequirePackage[UTF8, scheme=plain,punct=kaiming,space=auto]{ctex}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
@@ -91,6 +91,8 @@
 %\linenumbers
 \usepackage[backend=biber,style=chinese-erj,natbib]{biblatex}
 \addbibresource{erjref.bib}
+\renewcommand{\parencite}{\cite}
+
 \usepackage{indentfirst}
 
 \setlength{\parindent}{2em}
