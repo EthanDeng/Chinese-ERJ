@@ -6,7 +6,7 @@
 
 % --- Class structure: identification part
 % ---
-\ProvidesClass{ERJ}[2019/03/28 v1.00 Economic Research Journal Class]
+\ProvidesClass{chinese-erj}[2019/03/28 v1.00 Economic Research Journal Class]
 \NeedsTeXFormat{LaTeX2e} 
 
 
@@ -31,11 +31,20 @@
 \RequirePackage{amsmath,amssymb}
 
 
+\RequirePackage{lipsum,zhlipsum}
 
 
+\RequirePackage{hyperref}
+\hypersetup{
+  pdfborder={0 0 0},
+  colorlinks=none,
+  linktoc=all,
+}
 
 % indentation, table and figure package
 \RequirePackage{graphicx}
+
+
 \RequirePackage{abstract}
 
 \graphicspath{{image/}{figure/}{fig/}{img/}}
@@ -55,32 +64,22 @@
 
 
 
-% settings for the geometry
-% \RequirePackage{hyperref}
-% \hypersetup{
-%   pdfborder={0 0 0},
-%   colorlinks=true,
-%   linkcolor={winered},
-%   urlcolor={winered},
-%   filecolor={winered},
-%   citecolor={winered},
-%   linktoc=all,
-% }
 \RequirePackage[left=27.6mm, right=27.6mm, top=32.7mm, bottom=28mm]{geometry}
+% \setlength{\voffset}{-0.75in}
+\setlength{\headsep}{10pt}
 
-
+\newtoks\header
 
 \usepackage{fancyhdr}
 \fancyhead{} % clear all fields 
 % @author@title
-\fancyhead[LE]{张宁、张维洁：中国用能权交易可以获得经济红利与节能减排的双赢吗？} 
+\fancyhead[LE]{\the\header} 
 \fancyhead[OR]{\raisebox{-0.2\height}{\includegraphics[width=0.16\textwidth]{ERJ.png}} \raisebox{.2\height}{ \small 2019 年工作论文}}
-\fancyfoot[R]{\thepage} 
+\fancyfoot[OR,LE]{\thepage} 
 \fancyfoot[C]{} 
-% \fancyfoot[LO,CE]{From: K. Grant} 
-% \fancyfoot[CO,RE]{To: Dean A. Smith} 
+
 \renewcommand{\headrulewidth}{0.4pt} 
-% \renewcommand{\footrulewidth}{0.4pt}
+
 \pagestyle{fancy}
 
 
@@ -89,25 +88,118 @@
 \renewcommand{\absnamepos}{empty} % originally center
 %\usepackage{lineno}
 %\linenumbers
+
+
 \usepackage[backend=biber,style=chinese-erj,natbib]{biblatex}
-\addbibresource{erjref.bib}
-\renewcommand{\parencite}{\cite}
+\renewcommand*{\bibfont}{\scriptsize}
+\setlength\bibitemsep{0.2\baselineskip}
+\renewcommand{\refname}{\small  参考文献}
+\renewcommand{\parencite}{\cite} % if biblatex-gb7714-2015 更新则删除
+
+\newcommand{\erjref}{
+\vspace*{0.8\baselineskip}
+\begin{flushleft}
+\small 参考文献
+\vspace*{-0.3\baselineskip}
+\end{flushleft}}
+
+\let\origabstract=\abstract
+\def\abstract{\origabstract\vspace*{-0.1ex}\indent 内容提要：}
+
+\let\origendabstract=\endabstract
+\def\endabstract{\vskip2em\origendabstract}
+
+\newcommand{\keywords}[1]{\par 关键词：#1}
 
 \usepackage{indentfirst}
 
+
+\linespread{1.15}
 \setlength{\parindent}{2em}
+\setlength{\parskip}{0em}
 \renewcommand{\abstracttextfont}{\normalsize}
-\usepackage{zhlipsum}
+\renewcommand{\footnotesize}{\scriptsize}
+
 
 %\renewcommand{\baselinestretch}{1} 
-\linespread{1.15}
-\setlength{\parskip}{0em}
+
+
 \usepackage{titlesec}
 %\widowpenalty=10000 
 %\clubpenalty=10000 
 \titleformat{name=\section}[block]{\large\filcenter}{\zhnumber{\thesection}、}{0pt}{}
+\titleformat{name=\subsection}[hang]{\normalfont}{\hspace{2em}（\zhnumber{\arabic{subsection}}）}{0pt}{}
 \titlespacing*{\section}{0pt}{0.8\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.1\baselineskip}{0.1\baselineskip}
+
+\newtoks\entitle
+\newtoks\enauthor
+\newtoks\eninstitute
+\newtoks\enabstract
+\newtoks\enkeywords
+\newtoks\jel
 
 
 
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \if@twocolumn
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+    \else
+      \newpage
+      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \@maketitle
+    \fi
+    \thispagestyle{fancy}\@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@ELEGANT@version\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+  \global\let\ELEGANT@version\relax
+}
+\def\@maketitle{%
+\vspace*{-5ex}
+  \begin{center}%
+  \let \footnote \thanks
+    {\huge \@title \par}%
+    \vskip 2em%
+    {\Large\@author}%
+  \end{center}%
+}
 
+
+\newcommand{\enmaketitle}{%
+\vspace{2em}
+% \begin{titlepage}
+\begin{center}
+{\bfseries \Large \the\entitle}\\
+\the\enauthor\\
+\small(\the\eninstitute)
+\end{center}
+\vspace*{-2ex}
+\noindent\small\textbf{Summary:}\the\enabstract \\
+\textbf{Keywords:} \the\enkeywords \\
+\textbf{JEL Classification:} \the\jel
+% \end{titlepage}
+}
+
+\addbibresource{erjref.bib}
