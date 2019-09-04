@@ -182,7 +182,11 @@
   \let \footnote \thanks
     {\huge \@title \par}%
     \vskip 2em%
-    {\Large\@author}%
+    {\Large
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}
+      }%
   \end{center}%
 }
 
