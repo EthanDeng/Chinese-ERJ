@@ -7,7 +7,7 @@
 % --- Class structure: identification part
 % ---
 \ProvidesClass{chinese-erj}[2019/03/28 v1.00 Economic Research Journal Class]
-\NeedsTeXFormat{LaTeX2e} 
+\NeedsTeXFormat{LaTeX2e}
 
 
 
@@ -49,8 +49,8 @@
 
 \graphicspath{{image/}{figure/}{fig/}{img/}}
 
-% caption settings 
-\RequirePackage[font=small,labelfont={bf}]{caption} 
+% caption settings
+\RequirePackage[font=small,labelfont={bf}]{caption}
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
 
@@ -58,7 +58,7 @@
 \RequirePackage[shortlabels,inline]{enumitem}
 \setlist{nolistsep}
 
-% define the hyperref color 
+% define the hyperref color
 \RequirePackage{xcolor}
 \definecolor{winered}{rgb}{0.5,0,0}
 
@@ -71,14 +71,14 @@
 \newtoks\header
 
 \usepackage{fancyhdr}
-\fancyhead{} % clear all fields 
+\fancyhead{} % clear all fields
 % @author@title
-\fancyhead[LE]{\the\header} 
+\fancyhead[LE]{\the\header}
 \fancyhead[OR]{\raisebox{-0.2\height}{\includegraphics[width=0.16\textwidth]{ERJ.png}} \raisebox{.2\height}{ \small 2019 年工作论文}}
-\fancyfoot[OR,LE]{\thepage} 
-\fancyfoot[C]{} 
+\fancyfoot[OR,LE]{\thepage}
+\fancyfoot[C]{}
 
-\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\headrulewidth}{0.4pt}
 
 \pagestyle{fancy}
 
@@ -89,8 +89,11 @@
 %\usepackage{lineno}
 %\linenumbers
 
-
-\usepackage[backend=biber,style=chinese-erj,natbib]{biblatex}
+%
+% modified by hzz 20191009
+% 1.为避免正文中出现因姓名歧义处理而引出的名的缩写使用uniquename=false选项
+% 2.不再使用natbib选项，因为gb7714-2015ay样式已经定义了citet和citep命令
+\usepackage[backend=biber,style=chinese-erj,uniquename=false]{biblatex}
 \renewcommand*{\bibfont}{\scriptsize}
 \setlength\bibitemsep{0.2\baselineskip}
 \renewcommand{\refname}{\small  参考文献}
@@ -121,12 +124,12 @@
 \renewcommand{\footnotesize}{\scriptsize}
 
 
-%\renewcommand{\baselinestretch}{1} 
+%\renewcommand{\baselinestretch}{1}
 
 
 \usepackage{titlesec}
-%\widowpenalty=10000 
-%\clubpenalty=10000 
+%\widowpenalty=10000
+%\clubpenalty=10000
 \titleformat{name=\section}[block]{\large\filcenter}{\zhnumber{\thesection}、}{0pt}{}
 \titleformat{name=\subsection}[hang]{\normalfont}{\hspace{2em}（\zhnumber{\arabic{subsection}}）}{0pt}{}
 \titlespacing*{\section}{0pt}{0.8\baselineskip}{0.5\baselineskip}
