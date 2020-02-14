@@ -24,7 +24,6 @@
 \RequirePackage[UTF8, scheme=plain,punct=kaiming,space=auto]{ctex}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{newtxtext}
-\RequirePackage{newtxmath}
 % \RequirePackage{newtxtt}
 
 
